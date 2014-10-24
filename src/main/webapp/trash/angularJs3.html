@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+</head>
+
+<body>
+	<div class="container" ng-controller="mainController">
+		<div class="row text-center">
+			<div class="col-xs-6">
+				<!-- change goAds to not true or true -->
+				<a href ng-click="goAds = !goAds" class="btn btn-primary btn-lg">Show
+					all ads</a>
+			</div>
+			<div ng-controller="AdsController" ng-show="goAds">
+				<ul>
+					<li ng-repeat="x in ads">{{ 'id ----- '+x.id + ', title -----
+						'+ x.title }}</li>
+				</ul>
+				<ul>
+					<li ng-repeat="x in ads">{{ x }}</li>
+				</ul>
+				<ul>
+					<li ng-repeat="x in ads">guy ----- {{ x.guy }}</li>
+				</ul>
+				<ul>
+					<li ng-repeat="x in ads">category ----- {{ x.category}}, id
+						----- {{ x.id}}</li>
+				</ul>
+
+				<script src="angular-resource.js"></script>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container" ng-controller="mainController">
+		<div class="row text-center">
+			<div class="col-xs-6">
+				<!-- change goAds to not true or true -->
+				<a href ng-click="goAds = !goAds" class="btn btn-primary btn-lg">Show specific ad</a>
+			</div>
+			<div ng-controller="AdsController" ng-show="goAds">
+				<ul>
+					<li ng-repeat="x in ads">{{ 'id ----- '+x.id + ', title -----
+						'+ x.title }}</li>
+				</ul>
+				<ul>
+					<li ng-repeat="x in ads">{{ x }}</li>
+				</ul>
+				<ul>
+					<li ng-repeat="x in ads">guy ----- {{ x.guy }}</li>
+				</ul>
+				<ul>
+					<li ng-repeat="x in ads">category ----- {{ x.category}}, id
+						----- {{ x.id}}</li>
+				</ul>
+
+				<script src="angular-resource.js"></script>
+			</div>
+		</div>
+	</div>
+
+	<div ng-controller="Ctrl">
+
+		<form name="myForm">
+			<input type="radio" ng-model="color" value="red"> Red<br />
+			<input type="radio" ng-model="color" value="green"> Green<br />
+			<input type="radio" ng-model="color" value="blue"> Blue<br />
+		</form>
+
+		<div ng-show="isShown('red')">Red Selected</div>
+		<div ng-show="isShown('green')">Green Selected</div>
+		<div ng-show="isShown('blue')">Blue Selected</div>
+	</div>
+</body>
+</html>

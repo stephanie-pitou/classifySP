@@ -1,0 +1,25 @@
+<table class="table adtable">
+  <tr>
+    <td><h3>Details for {{ad.title}}</h3></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Ad Title</td>
+    <td>{{ad.title}}</td>
+  </tr>
+  <tr>
+    <td>Director</td>
+    <td>{{ad.price}}</td>
+  </tr>
+  <tr>
+    <td>Release Year</td>
+    <td>{{ad.category.name}}</td>
+  </tr>
+  <tr>
+    <td>Ad Genre</td>
+    <td>{{ad.content}}</td>
+  </tr>
+</table>
+<div>
+  <a class="btn btn-primary" ui-sref="Ad({id:ad._id})">Edit</a>
+</div>

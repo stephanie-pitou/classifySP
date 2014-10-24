@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+</head>
+
+<body>
+
+	<div ng-controller="AdsController">
+
+		<ul>
+			<li ng-repeat="x in ads">{{ 'id ----- '+x.id + ', title ----- '+
+				x.title }}</li>
+		</ul>
+
+		<ul>
+			<li ng-repeat="x in ads">{{ x }}</li>
+		</ul>
+
+		<ul>
+			<li ng-repeat="x in ads">guy ----- {{ x.guy }}</li>
+		</ul>
+
+		<ul>
+			<li ng-repeat="x in ads">category ----- {{ x.category}}, id
+				----- {{ x.id}}</li>
+		</ul>
+
+		<script src="angular-resource.js"></script>
+	</div>
+</body>
+</html>

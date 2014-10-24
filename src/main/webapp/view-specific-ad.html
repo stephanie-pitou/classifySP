@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table class="table movietable">
+		<tr>
+			<td><h3>Details for {{x.title}}</h3></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Price</td>
+			<td>{{x.price}} €</td>
+		</tr>
+		<tr>
+			<td>Category</td>
+			<td>{{x.category.name}}</td>
+		</tr>
+		<tr>
+			<td>Content</td>
+			<td>{{x.content}}</td>
+		</tr>
+	</table>
+	<div>
+		<a class="btn btn-primary" ui-sref="editMovie({id:movie._id})">Edit</a>
+	</div>
+</body>
+</html>

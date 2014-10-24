@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+
+html, body {
+	background-color: #ecf0f1;
+	margin: 20px auto;
+	display: block;
+	max-width: 700px;
+	height: 100%;
+}
+
+header{
+	display: inline-block;
+}
+
+body {
+	padding: 20px;
+	position: relative;
+}
+
+article {
+	border-width: 2px;
+	border-style: solid;
+	border-color: black;
+	border-radius: 20px;
+}
+
+a {
+	margin-right: 20px;
+}
+
+div {
+	margin: 20px 0px 20px 0px;
+}
+
+article {
+	margin: 20px 0px 20px 0px;
+	padding: 0px 0px 0px 10px;
+}
+
+.button {
+	display: inline-block;
+	height: 25px;
+	/* 	position: absolute; */
+	right: 5px;
+	bottom: 5px;
+	background: white;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-size: 1.2em;
+	/* 	text-align: center; */
+	padding: 3px 25px 0px 25px;
+	color: gray;
+	text-decoration: none;
+}
+
+.title-price {
+	display: inline-block;
+	float: right;
+}
+
+.user{
+	display: inline-block;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="style.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+</head>
+
+<body>
+	<header>
+		<h1>Classify</h1>
+		<div class="user">
+			<p>
+				toto <a href="#user"> <img src="avatar_femme.png" alt="HTML tutorial" style="width: 80px; height: 80px; border: 0">
+				</a>
+			</p>
+		</div>
+	</header>
+	<div>
+		<a href="#newAd" class="button">New Ad</a> <a href="#myAds" class="button">My Ads</a>
+	</div>
+
+	<section ng-controller="AdsController">
+		<article ng-repeat="x in ads">
+			<a href="#showAd">{{x.title}}</a>
+			<div class="title-price">
+				<!-- <h2>{{x.title}}</h2> -->
+				<span>{{x.price}} €</span>
+			</div>
+			<div>
+				<span>{{x.category.name}}</span>
+				<p>{{x.content}}</p>
+			</div>
+			<br />
+		</article>
+	</section>
+</body>
+</html>

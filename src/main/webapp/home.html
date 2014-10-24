@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="style.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script>
+<script src="routes.js"></script>
+<script src="style.css"></script>
+<script src="controllers.js"></script>
+<script src="services.js"></script>
+<script src="app.js"></script>
+</head>
+
+<body ng-app="animateApp">
+	<!-- inject our views using ng-view -->
+	<!-- each angular controller applies a different class here -->
+	<div class="page {{ pageClass }}" ng-view></div>
+
+	<div class="col-xs-8 col-xs-offset-2">
+		<div ui-view></div>
+		<!-- This is where our views will load -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<a ui-sref="newAd" class="btn-primary btn-lg nodecoration">Add New Ad</a>
+ 
+<table class="table movietable">
+  <tr>
+    <td><h3>All Ads</h3></td>
+    <td></td>
+  </tr>
+  <tr ng-repeat="ad in ads">
+    <td>{{ad.title}}</td>
+    <td>
+      <a class="btn btn-primary" ui-sref="viewAd({id:ad._id})">View</a>
+      <a class="btn btn-danger"  ng-click="deleteAd(ad)">Delete</a>
+    </td>
+  </tr>
+</table>

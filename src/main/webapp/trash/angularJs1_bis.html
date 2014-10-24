@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+</head>
+
+<body>
+
+	<div ng-app="" ng-controller="customersController">
+	<p>{{ad}}</p>
+
+		<ul>
+			<!-- 					<li ng-repeat="x in ads">{{ 'id -----   '+x.id + ', title -----   ' + x.title }}</li> -->
+
+			<li>{{ 'id ----- '+id + ', title ----- ' + title }}</li>
+		</ul>
+
+		<ul>
+			<!-- 		<li ng-repeat="x in ads">{{ x }}</li> -->
+			<li>{{ x }}</li>
+		</ul>
+
+		<ul>
+			<!-- 					<li ng-repeat="x in ads"> guy -----   {{ x.guy   }}</li> -->
+
+			<li>guy ----- {{ x.guy }}</li>
+		</ul>
+
+		<ul>
+<!-- 		<li ng-repeat="x in ads">category ----- {{ x.category}}, id -->
+<!-- 				----- {{ x.id}}</li> -->
+			<li>category ----- {{ x.category}}, id
+				----- {{ x.id}}</li>
+		</ul>
+
+	</div>
+
+	<script>
+		function customersController($scope, $http) {
+			$http.get("api/ad/1").success(function(response) {
+				$scope.ad = response;
+			});
+		}
+	</script>
+
+</body>
+</html>

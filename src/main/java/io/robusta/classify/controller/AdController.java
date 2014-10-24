@@ -55,124 +55,124 @@ import net.sf.ehcache.Element;
 // @Produces( "application/json" )
 public class AdController extends JaxRsController {
 
-    AdBusiness   adBusiness   = new AdBusiness();
-    UserBusiness userBusiness = new UserBusiness();
+	AdBusiness adBusiness = new AdBusiness();
+	UserBusiness userBusiness = new UserBusiness();
 
-    @GET
-    public String list() {
-        String path = uriInfo.getPath();
+	@GET
+	public String list() {
+		String path = uriInfo.getPath();
 
-        // EhCache
-        Ehcache rraCache = RraCache.getCache( "rraCache" );
-        Element element = rraCache.get( path );
-        Representation representation = null;
-        if ( element == null ) {
-            ResourceList<Long, Ad> ads = adBusiness.list();
-            if ( ads != null ) {
-                representation = new GsonRepresentation( ads );
-                element = new Element( path, representation );
-                rraCache.put( element );
-            }
-        } else {
-            System.out.println( path + ": get from cache" );
-            representation = (Representation) element.getObjectValue();
-        }
-        RraCache.getInstance().displayCache();
+		// EhCache
+		Ehcache rraCache = RraCache.getCache("rraCache");
+		Element element = rraCache.get(path);
+		Representation representation = null;
+		if (element == null) {
+			ResourceList<Long, Ad> ads = adBusiness.list();
+			if (ads != null) {
+				representation = new GsonRepresentation(ads);
+				element = new Element(path, representation);
+				rraCache.put(element);
+			}
+		} else {
+			System.out.println(path + ": get from cache");
+			representation = (Representation) element.getObjectValue();
+		}
+		RraCache.getInstance().displayCache();
 
-        // MyCache
-        Representation representation1 = MyCache.getInstance().get( path );
-        if ( representation1 == null ) {
-            ResourceList<Long, Ad> ads = adBusiness.list();
-            if ( ads != null ) {
-                representation1 = new GsonRepresentation( ads );
-                MyCache.getInstance().put( path, representation1, ads );
-            }
-        }
-        MyCache.getInstance().displayCache();
+		// MyCache
+		Representation representation1 = MyCache.getInstance().get(path);
+		if (representation1 == null) {
+			ResourceList<Long, Ad> ads = adBusiness.list();
+			if (ads != null) {
+				representation1 = new GsonRepresentation(ads);
+				MyCache.getInstance().put(path, representation1, ads);
+			}
+		}
+		MyCache.getInstance().displayCache();
 
-        if ( representation != null ) {
-            return representation.toString();
-        }
-        // if ( representation1 != null ) {
-        // return representation1.toString();
-        // }
-        return "";
-    }
+		if (representation != null) {
+			return representation.toString();
+		}
+		// if ( representation1 != null ) {
+		// return representation1.toString();
+		// }
+		return "";
+	}
 
-    @GET
-    @Path( "{ad}" )
-    public String listByAd( @PathParam( "ad" ) Long adId ) {
+	@GET
+	@Path("{ad}")
+	public String listByAd(@PathParam("ad") Long adId) {
 
-        String path = uriInfo.getPath();
+		String path = uriInfo.getPath();
 
-        // EhCache
-        Ehcache rraCache = RraCache.getCache( "rraCache" );
-        Element element = rraCache.get( path );
-        Representation representation = null;
-        if ( element == null ) {
-            Resource resource = adBusiness.find( adId );
-            if ( resource != null ) {
-                representation = new GsonRepresentation( resource );
-                element = new Element( path, representation );
-                rraCache.put( element );
-            }
-        } else {
-            System.out.println( path + ": get from cache" );
-            representation = (Representation) element.getObjectValue();
-        }
-        RraCache.getInstance().displayCache();
+		// EhCache
+		Ehcache rraCache = RraCache.getCache("rraCache");
+		Element element = rraCache.get(path);
+		Representation representation = null;
+		if (element == null) {
+			Resource resource = adBusiness.find(adId);
+			if (resource != null) {
+				representation = new GsonRepresentation(resource);
+				element = new Element(path, representation);
+				rraCache.put(element);
+			}
+		} else {
+			System.out.println(path + ": get from cache");
+			representation = (Representation) element.getObjectValue();
+		}
+		RraCache.getInstance().displayCache();
 
-        // MyCache
-        Representation representation1 = MyCache.getInstance().get( path );
-        if ( representation1 == null ) {
-            Resource resource = adBusiness.find( adId );
-            if ( resource != null ) {
-                representation1 = new GsonRepresentation( resource );
-                MyCache.getInstance().put( path, representation1, resource );
-            }
-        }
-        MyCache.getInstance().displayCache();
+		// MyCache
+		Representation representation1 = MyCache.getInstance().get(path);
+		if (representation1 == null) {
+			Resource resource = adBusiness.find(adId);
+			if (resource != null) {
+				representation1 = new GsonRepresentation(resource);
+				MyCache.getInstance().put(path, representation1, resource);
+			}
+		}
+		MyCache.getInstance().displayCache();
 
-        if ( representation != null ) {
-            return representation.toString();
-        }
-        // if ( representation1 != null ) {
-        // return representation1.toString();
-        // }
-        return "";
-    }
+		if (representation != null) {
+			return representation.toString();
+		}
+		// if ( representation1 != null ) {
+		// return representation1.toString();
+		// }
+		return "";
+	}
 
-    @POST
-    @Path( "create" )
-    @Consumes( "application/json" )
-    public String createAdJson( String json ) {
-        GsonRepresentation representation = new GsonRepresentation( json );
-        Ad ad = representation.get( Ad.class );
-        adBusiness.add( ad );
-        return representation.toString();
-    }
+	@POST
+	@Path("create")
+	@Consumes("application/json")
+	public String createAdJson(String json) {
+		GsonRepresentation representation = new GsonRepresentation(json);
+		Ad ad = representation.get(Ad.class);
+		adBusiness.add(ad);
+		return representation.toString();
+	}
 
-    @PUT
-    @Path( "update" )
-    @Consumes( "application/json" )
-    public String addAd( String json ) {
-        GsonRepresentation representation = new GsonRepresentation( json );
-        Ad ad = representation.get( Ad.class );
-        adBusiness.set( ad );
-        representation.set( "new champ", "champ" );
-        MyCache.getInstance().invalidate( "ad:" + ad.getId() );
-        MyCache.getInstance().displayCache();
-        return representation.toString();
-    }
+	@PUT
+	@Path("update")
+	@Consumes("application/json")
+	public String addAd(String json) {
+		GsonRepresentation representation = new GsonRepresentation(json);
+		Ad ad = representation.get(Ad.class);
+		adBusiness.set(ad);
+		representation.set("new champ", "champ");
+		MyCache.getInstance().invalidate("ad:" + ad.getId());
+		MyCache.getInstance().displayCache();
+		return representation.toString();
+	}
 
-    @DELETE
-    @Path( "delete/{ad}" )
-    public String deleteAd( @PathParam( "ad" ) Long adId ) {
-        Ad ad = adBusiness.find( adId );
-        adBusiness.delete( ad );
-        GsonRepresentation representation = new GsonRepresentation( ad );
-        MyCache.getInstance().invalidate( "ad:" + ad.getId() );
-        MyCache.getInstance().displayCache();
-        return representation.toString();
-    }
+	@DELETE
+	@Path("delete/{ad}")
+	public String deleteAd(@PathParam("ad") Long adId) {
+		Ad ad = adBusiness.find(adId);
+		adBusiness.delete(ad);
+		GsonRepresentation representation = new GsonRepresentation(ad);
+		MyCache.getInstance().invalidate("ad:" + ad.getId());
+		MyCache.getInstance().displayCache();
+		return representation.toString();
+	}
 }
